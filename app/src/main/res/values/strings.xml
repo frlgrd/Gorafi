@@ -1,7 +1,7 @@
 <resources>
 
 	<!-- App -->
-	<string name="app_name">RssStream</string>
+	<string name="app_name">RSS Stream - Gorafi</string>
 	<string name="error_unknown">An unknown error occurred</string>
 	<string name="error_network">Check your connection</string>
 	<string name="error_no_response">%s don\'t respond</string>
@@ -9,7 +9,7 @@
 
 	<!-- Feed list -->
 	<string name="feed_title">Feed</string>
-
+	<string name="feed_no_data">No available article</string>
 	<!-- Article detail -->
 	<string name="article_detail_share">Share</string>
 </resources>

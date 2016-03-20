@@ -1,10 +1,12 @@
 package com.frlgrd.rssstream.ui.feed;
 
+import android.graphics.PorterDuff;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.frlgrd.rssstream.R;
 import com.frlgrd.rssstream.core.FeedManager;
@@ -32,7 +34,9 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 	@ViewById
 	RecyclerView recyclerView;
 	@ViewById
-	View loader;
+	ProgressBar loader;
+	@ViewById
+	View emptyView;
 
 	@AfterViews
 	void afterViews() {
@@ -41,26 +45,28 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(feedAdapter);
 
-		loadData();
+		loader.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
 
 		swipeRefreshLayout.setOnRefreshListener(this);
-		swipeRefreshLayout.setColorSchemeResources(
-				android.R.color.holo_blue_bright,
-				android.R.color.holo_green_light,
-				android.R.color.holo_orange_light,
-				android.R.color.holo_red_light
-		);
+		swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
 		feedAdapter.setOnItemClickedListener(this);
+
+		loadData();
 	}
 
 	private void loadData() {
+		emptyView.setVisibility(View.GONE);
 		feedManager.retrieveFeedItems()
 				.compose(bindToLifeCycle())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSubscribe(() -> setLoadingState(true))
 				.doOnTerminate(() -> setLoadingState(false))
-				.subscribe(feedAdapter::replaceAll, throwable -> {
+				.subscribe(feedItems -> {
+					feedAdapter.replaceAll(feedItems);
+					emptyView.setVisibility(feedItems.isEmpty() ? View.VISIBLE : View.GONE);
+				}, throwable -> {
+					emptyView.setVisibility(recyclerView.getAdapter().getItemCount() == 0 ? View.VISIBLE : View.GONE);
 					Snackbar.make(toolbar, throwable.getMessage(), Snackbar.LENGTH_LONG).show();
 				});
 	}

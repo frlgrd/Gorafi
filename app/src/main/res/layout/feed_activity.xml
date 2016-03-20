@@ -9,6 +9,15 @@
 		android:id="@+id/header"
 		layout="@layout/app_toolbar"/>
 
+	<TextView
+		android:id="@+id/emptyView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:gravity="center"
+		android:text="@string/feed_no_data"
+		android:visibility="gone"/>
+
 	<android.support.v4.widget.SwipeRefreshLayout
 		android:id="@+id/swipeRefreshLayout"
 		android:layout_width="match_parent"
@@ -25,6 +34,7 @@
 		android:id="@+id/loader"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
 		android:visibility="gone"/>
 
 </RelativeLayout>
