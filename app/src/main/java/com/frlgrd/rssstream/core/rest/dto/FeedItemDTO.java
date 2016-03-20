@@ -1,6 +1,7 @@
 package com.frlgrd.rssstream.core.rest.dto;
 
 import com.frlgrd.rssstream.core.model.FeedItem;
+import com.frlgrd.rssstream.utils.DateUtils;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -39,7 +40,7 @@ public class FeedItemDTO {
 		item.setDescription(dto.getDescription());
 		item.setThumbnail(dto.getThumbnail());
 		item.setLink(dto.getLink());
-		//TODO parse DateTime
+		item.setPubDate(DateUtils.format(dto.getPubDate()));
 		item.setContent(dto.getContent());
 		item.setMediumThumbnail(dto.getMediumThumbnail());
 		item.setLargeThumbnail(dto.getLargeThumbnail());

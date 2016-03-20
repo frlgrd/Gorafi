@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.frlgrd.rssstream.R;
 import com.frlgrd.rssstream.core.model.FeedItem;
 import com.frlgrd.rssstream.ui.common.ToolbarActivity;
+import com.frlgrd.rssstream.utils.DateUtils;
 import com.frlgrd.rssstream.utils.ImageUtils;
 
 import org.androidannotations.annotations.AfterViews;
@@ -38,6 +39,7 @@ public class ArticleDetailActivity extends ToolbarActivity {
 
 		ImageUtils.loadImage(this, headerImage, article.getLargeThumbnail());
 		title.setText(article.getTitle());
+		date.setText(DateUtils.toMediumDate(article.getPubDate()));
 		description.setText(article.getDescription());
 		content.setText(Html.fromHtml(article.getContent()));
 
