@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.frlgrd.rssstream.R;
+import com.frlgrd.rssstream.core.Logger;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -21,6 +22,7 @@ public class ImageUtils {
 	 */
 	public static void loadImage(@NonNull Context context, @NonNull ImageView target, @Nullable String url) {
 		if (!TextUtils.isEmpty(url)) {
+			Logger.info("Loading %s", url);
 			picasso(context)
 					.load(url)
 					.placeholder(R.drawable.thumbnail_placeholder)
@@ -32,10 +34,12 @@ public class ImageUtils {
 
 						@Override
 						public void onError() {
+							Logger.error("%s can't be loaded", url);
 							picasso(context).invalidate(url);
 						}
 					});
 		} else {
+			Logger.warn("Url is empty");
 			target.setImageResource(R.drawable.thumbnail_placeholder);
 		}
 	}
