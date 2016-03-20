@@ -1,0 +1,12 @@
+<resources>
+
+	<!-- App -->
+	<string name="app_name">RssStream</string>
+
+	<!-- Feed list -->
+	<string name="feed_title">Feed</string>
+	<string name="error_unknown">Une erreur inconnues est survenue</string>
+	<string name="error_network">Vérifiez votre connexion</string>
+	<string name="error_no_response">Le serveur %s ne répond pas</string>
+	<string name="error_network_http_error">Une erreur HTTP est survenue</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Feed item view -->
+	<dimen name="feed_item_view_padding">5dp</dimen>
+	<dimen name="feed_item_view_thumbnail_size">110dp</dimen>
+	<dimen name="feed_item_view_horizontal_margin">5dp</dimen>
+
+	<!-- Article detail -->
+	<dimen name="article_detail_header_height">230dp</dimen>
+	<dimen name="article_detail_title_margin">10dp</dimen>
+	<dimen name="article_detail_scrollview_padding">10dp</dimen>
+	<dimen name="article_detail_vertical_margin">10dp</dimen>
+</resources>

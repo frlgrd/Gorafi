@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+	android:id="@+id/rlDetail"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appBarLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+		<android.support.design.widget.CollapsingToolbarLayout
+			android:id="@+id/collapsingToolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:contentScrim="?attr/colorPrimary"
+			app:expandedTitleMarginEnd="60dp"
+			app:expandedTitleMarginStart="60dp"
+			app:expandedTitleTextAppearance="@android:color/transparent"
+			app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/article_detail_header_height"
+				app:layout_collapseMode="parallax">
+
+				<ImageView
+					android:id="@+id/headerImage"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:scaleType="centerCrop"
+					tools:ignore="ContentDescription"/>
+
+				<TextView
+					android:id="@+id/title"
+					style="@android:style/TextAppearance.DeviceDefault.Large"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentBottom="true"
+					android:layout_margin="@dimen/article_detail_title_margin"
+					android:textStyle="bold"
+					tools:text="Titre de l'article"/>
+			</RelativeLayout>
+
+			<android.support.v7.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				app:layout_collapseMode="pin"/>
+		</android.support.design.widget.CollapsingToolbarLayout>
+	</android.support.design.widget.AppBarLayout>
+
+	<android.support.v4.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="@dimen/article_detail_scrollview_padding">
+
+			<TextView
+				android:id="@+id/date"
+				style="@android:style/TextAppearance.DeviceDefault.Small"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				tools:text="Date de l'article"/>
+
+			<TextView
+				android:id="@+id/description"
+				style="@android:style/TextAppearance.DeviceDefault.Medium"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/article_detail_vertical_margin"
+				android:textColor="@android:color/black"
+				tools:text="Texte texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte "/>
+
+			<TextView
+				android:id="@+id/content"
+				style="@android:style/TextAppearance.DeviceDefault.Small"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/article_detail_vertical_margin"
+				android:textColor="@android:color/black"
+				tools:text="Texte texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte "/>
+
+
+		</LinearLayout>
+	</android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

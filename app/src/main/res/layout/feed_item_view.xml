@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:paddingLeft="@dimen/feed_item_view_padding"
+	android:paddingRight="@dimen/feed_item_view_padding"
+	android:paddingTop="@dimen/feed_item_view_padding">
+
+	<ImageView
+		android:id="@+id/image"
+		android:layout_width="@dimen/feed_item_view_thumbnail_size"
+		android:layout_height="@dimen/feed_item_view_thumbnail_size"
+		android:scaleType="centerCrop"
+		tools:ignore="ContentDescription"
+		tools:src="@drawable/thumbnail_placeholder"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_marginLeft="@dimen/feed_item_view_horizontal_margin"
+		android:layout_toRightOf="@+id/image"
+		android:orientation="vertical"
+		tools:ignore="RtlHardcoded">
+
+		<TextView
+			android:id="@+id/title"
+			style="@android:style/TextAppearance.DeviceDefault.Large.Inverse"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="1"
+			tools:text="adazd adazd adazd adazd adazd"/>
+
+		<TextView
+			android:id="@+id/description"
+			style="@android:style/TextAppearance.DeviceDefault.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ellipsize="end"
+			android:maxLines="5"
+			tools:text="adazd adazd adazd adazd adazdadazd adazd adazd adazd adazdadazd adazd adazd adazd adazdadazd adazd adazd adazd adazdadazd adazd adazd adazd adazd d adazd adazd adazd adazdadazd adazd adazd adazd adazdadazd adazd adazd adazd adazdadazd adazd adazd adazd adazdadazd adazd adazd adazd adazd"/>
+	</LinearLayout>
+
+</RelativeLayout>
