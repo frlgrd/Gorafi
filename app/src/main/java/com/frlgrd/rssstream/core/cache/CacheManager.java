@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.frlgrd.rssstream.core.Logger;
 import com.frlgrd.rssstream.core.cache.serializer.JodaPeriodTypeSerializer;
-import com.frlgrd.rssstream.utils.DateUtils;
 import com.snappydb.DB;
 import com.snappydb.SnappyDB;
 import com.snappydb.SnappydbException;
@@ -26,7 +25,6 @@ import rx.schedulers.Schedulers;
 @EBean(scope = EBean.Scope.Singleton)
 public class CacheManager {
 
-	private static final long CACHE_DURATION_MIN = 50;
 	@RootContext
 	Context context;
 	private DB db;
@@ -50,6 +48,11 @@ public class CacheManager {
 
 	/**
 	 * Handle cache for the requested data. The asyncObservable should return a list of data if needed
+	 *
+	 * @param key             cache data identifier
+	 * @param strategy        cache policy
+	 * @param asyncObservable network stream
+	 * @param <T>             Data type
 	 */
 	public <T> Observable<T> executeRx(final String key, final CacheStrategy strategy, final Observable<T> asyncObservable) {
 		return loadData(key, strategy,
@@ -61,6 +64,12 @@ public class CacheManager {
 		).subscribeOn(Schedulers.io());
 	}
 
+	/**
+	 * @param key             cache data identifier
+	 * @param strategy        cache policy
+	 * @param asyncObservable network stream
+	 * @param <T>             Data type
+	 */
 	private <T> Observable<T> loadData(final String key, final CacheStrategy strategy, final Observable<T> asyncObservable) {
 		Observable<CacheWrapper<T>> cacheObservable = Observable.create(new Observable.OnSubscribe<CacheWrapper<T>>() {
 			@Override
@@ -83,21 +92,6 @@ public class CacheManager {
 				return cacheObservable
 						.map(CacheWrapper::getData)
 						.concatWith(asyncObservable);
-			case ASYNC_IF_NEEDED:
-				return cacheObservable
-						.filter(cacheWrapper -> timeBetweenThenAndNowInMin(cacheWrapper.getCachedDate(), new Date()) <= CACHE_DURATION_MIN)
-						.map(CacheWrapper::getData)
-						.switchIfEmpty(asyncObservable
-								.onErrorResumeNext(throwable -> cacheObservable
-										.map(CacheWrapper::getData)
-										.switchIfEmpty(Observable.error(throwable))));
-			case JUST_CACHE_ASYNC_IF_FAILED:
-				return cacheObservable
-						.map(CacheWrapper::getData)
-						.switchIfEmpty(asyncObservable
-								.onErrorResumeNext(throwable -> cacheObservable
-										.map(CacheWrapper::getData)
-										.switchIfEmpty(Observable.error(throwable))));
 			case JUST_CACHE:
 				return cacheObservable
 						.map(CacheWrapper::getData);
@@ -105,10 +99,6 @@ public class CacheManager {
 				return asyncObservable;
 			case NO_CACHE_BUT_SAVED:
 				return asyncObservable.onErrorResumeNext(cacheObservable.map(CacheWrapper::getData));
-			case SAME_DAY:
-				return cacheObservable
-						.filter(cacheWrapper -> DateUtils.sameDay(cacheWrapper.getCachedDate(), new Date()))
-						.map(CacheWrapper::getData).switchIfEmpty(asyncObservable);
 		}
 		return asyncObservable;
 	}
@@ -122,21 +112,11 @@ public class CacheManager {
 	}
 
 	public synchronized <T extends Serializable> T get(String key, Class<T> clazz) {
-		return get(key, clazz, null);
-	}
-
-	private long timeBetweenThenAndNowInMin(Date then, Date now) {
-		long timeThen = then.getTime() / 1000;
-		long timeNow = now.getTime() / 1000;
-		return (timeNow - timeThen) / 60;
-	}
-
-	public synchronized <T extends Serializable> T get(String key, Class<T> clazz, T defaultValue) {
 		try {
 			if (getDb().exists(key)) {
 				return getDb().get(key, clazz);
 			} else {
-				return defaultValue;
+				return null;
 			}
 		} catch (SnappydbException e) {
 			Logger.warn("Data with key %s couldn't be retrieved from cache. Deleting it", e, key);
