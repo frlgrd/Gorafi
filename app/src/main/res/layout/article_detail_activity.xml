@@ -85,6 +85,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginTop="@dimen/article_detail_vertical_margin"
 					android:textColor="@android:color/black"
+					android:textStyle="bold"
 					tools:text="Texte texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte  texte "/>
 
 				<TextView
