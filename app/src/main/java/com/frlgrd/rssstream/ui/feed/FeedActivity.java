@@ -1,12 +1,10 @@
 package com.frlgrd.rssstream.ui.feed;
 
-import android.graphics.PorterDuff;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import com.frlgrd.rssstream.R;
 import com.frlgrd.rssstream.core.FeedManager;
@@ -34,8 +32,6 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 	@ViewById
 	RecyclerView recyclerView;
 	@ViewById
-	ProgressBar loader;
-	@ViewById
 	View emptyView;
 
 	@AfterViews
@@ -45,12 +41,12 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(feedAdapter);
 
-		loader.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
-
 		swipeRefreshLayout.setOnRefreshListener(this);
 		swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
 		feedAdapter.setOnItemClickedListener(this);
+
+		swipeRefreshLayout.setRefreshing(true);
 
 		loadData();
 	}
@@ -73,7 +69,6 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 
 	private void setLoadingState(boolean isLoading) {
 		swipeRefreshLayout.setRefreshing(isLoading);
-		loader.setVisibility(isLoading ? View.VISIBLE : View.GONE);
 	}
 
 	@Override
