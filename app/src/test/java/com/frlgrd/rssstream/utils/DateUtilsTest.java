@@ -16,11 +16,4 @@ public class DateUtilsTest extends TestCase {
 		assertFalse(DateUtils.sameDay(DateTime.now(), DateTime.now().plusDays(1)));
 		assertFalse(DateUtils.sameDay(DateTime.now().minusDays(1), DateTime.now()));
 	}
-
-	@Test
-	public void DateUtils_daysBetween() throws Exception {
-		assertEquals(1, DateUtils.daysBetween(DateTime.now(), DateTime.now().plusDays(1)));
-		assertEquals(1, DateUtils.daysBetween(DateTime.now(), DateTime.now().minusDays(1)));
-		assertEquals(0, DateUtils.daysBetween(DateTime.now(), DateTime.now()));
-	}
 }

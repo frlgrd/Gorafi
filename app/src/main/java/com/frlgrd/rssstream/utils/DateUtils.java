@@ -25,6 +25,13 @@ public class DateUtils {
 		return dateTime == null ? null : DateTimeFormat.mediumDate().print(dateTime);
 	}
 
+	public static boolean sameDay(DateTime then, DateTime now) {
+		if (then == null || now == null) {
+			return false;
+		}
+		return sameDay(then.toDate(), now.toDate());
+	}
+
 	public static boolean sameDay(Date then, Date now) {
 
 		Calendar cal1 = Calendar.getInstance();
