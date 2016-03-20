@@ -9,4 +9,7 @@
 
 	<!-- Feed list -->
 	<string name="feed_title">Feed</string>
+
+	<!-- Article detail -->
+	<string name="article_detail_share">Share</string>
 </resources>

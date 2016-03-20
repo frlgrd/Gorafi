@@ -9,4 +9,7 @@
 	<string name="error_network">Vérifiez votre connexion</string>
 	<string name="error_no_response">Le serveur %s ne répond pas</string>
 	<string name="error_network_http_error">Une erreur HTTP est survenue</string>
+
+	<!-- Article detail -->
+	<string name="article_detail_share">Partager</string>
 </resources>

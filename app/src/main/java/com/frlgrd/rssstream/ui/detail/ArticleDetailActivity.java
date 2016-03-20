@@ -11,8 +11,10 @@ import com.frlgrd.rssstream.core.model.FeedItem;
 import com.frlgrd.rssstream.ui.common.ToolbarActivity;
 import com.frlgrd.rssstream.utils.DateUtils;
 import com.frlgrd.rssstream.utils.ImageUtils;
+import com.frlgrd.rssstream.utils.IntentUtils;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
@@ -44,5 +46,10 @@ public class ArticleDetailActivity extends ToolbarActivity {
 		content.setText(Html.fromHtml(article.getContent()));
 
 		collapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
+	}
+
+	@Click
+	void fabClicked() {
+		IntentUtils.share(this, article);
 	}
 }
