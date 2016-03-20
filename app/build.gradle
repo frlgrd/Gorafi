@@ -80,7 +80,7 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
-    compile ("com.github.VictorAlbertos:RxCache:1.1.0") {
+    compile("com.github.VictorAlbertos:RxCache:1.1.0") {
         exclude module: 'guava'
     }
     compile 'com.squareup.picasso:picasso:2.5.0'
