@@ -56,8 +56,8 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 		feedManager.retrieveFeedItems()
 				.compose(bindToLifeCycle())
 				.observeOn(AndroidSchedulers.mainThread())
-				.doOnSubscribe(() -> setLoadingState(true))
-				.doOnTerminate(() -> setLoadingState(false))
+				.doOnSubscribe(() -> swipeRefreshLayout.setRefreshing(true))
+				.doOnTerminate(() -> swipeRefreshLayout.setRefreshing(false))
 				.subscribe(feedItems -> {
 					feedAdapter.replaceAll(feedItems);
 					emptyView.setVisibility(feedItems.isEmpty() ? View.VISIBLE : View.GONE);
@@ -65,10 +65,6 @@ public class FeedActivity extends ToolbarActivity implements SwipeRefreshLayout.
 					emptyView.setVisibility(recyclerView.getAdapter().getItemCount() == 0 ? View.VISIBLE : View.GONE);
 					Snackbar.make(toolbar, throwable.getMessage(), Snackbar.LENGTH_LONG).show();
 				});
-	}
-
-	private void setLoadingState(boolean isLoading) {
-		swipeRefreshLayout.setRefreshing(isLoading);
 	}
 
 	@Override
