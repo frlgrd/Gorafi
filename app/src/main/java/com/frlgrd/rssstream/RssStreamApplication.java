@@ -12,9 +12,6 @@ public class RssStreamApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		/**
-		 * see {@link <a>https://github.com/JakeWharton/timber</a>}
-		 */
 		Timber.plant(new Timber.DebugTree());
 	}
 }

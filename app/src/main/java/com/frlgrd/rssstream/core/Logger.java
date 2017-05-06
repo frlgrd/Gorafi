@@ -1,5 +1,7 @@
 package com.frlgrd.rssstream.core;
 
+import android.annotation.SuppressLint;
+
 import java.util.WeakHashMap;
 
 import timber.log.Timber;
@@ -12,7 +14,7 @@ public class Logger {
 		Timber.v(improveLog(message), args);
 	}
 
-	protected static String improveLog(String message) {
+	private static String improveLog(String message) {
 		String caller = retrieveCaller();
 		if (caller == null)
 			return message;
@@ -20,7 +22,7 @@ public class Logger {
 		return String.format("%s - %s", caller, message);
 	}
 
-	protected static String retrieveCaller() {
+	@SuppressLint("DefaultLocale") private static String retrieveCaller() {
 		try {
 			StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 
@@ -38,7 +40,7 @@ public class Logger {
 		return null;
 	}
 
-	protected static String shortenCanonicalName(final String canonicalName) {
+	private static String shortenCanonicalName(final String canonicalName) {
 		if (canonicalName == null)
 			return null;
 
